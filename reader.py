@@ -48,7 +48,6 @@ file = open("cards.sql", "x", encoding="utf-8")
 
 with open('cards.json', encoding="utf-8") as json_file:
     data = json.load(json_file)
-    append_later = ''
 
     supertype_count = 1
     subtype_count = 1
@@ -58,7 +57,14 @@ with open('cards.json', encoding="utf-8") as json_file:
     weakness_count = 1
     resistance_count = 1
     retreat_count = 1
+
     set_card_count = 1
+    card_subtype_count = 1
+    card_type_count = 1
+    card_ability_count = 1
+    card_attack_count = 1
+    card_weakness_count = 1
+    card_resistance_count = 1
 
     supertypes = []
     subtypes = []
@@ -68,7 +74,9 @@ with open('cards.json', encoding="utf-8") as json_file:
     weaknesses = []
     resistances = []
 
+
     for card in data:
+        append_later = ''
         if not any(d['name'] == card['supertype'] for d in supertypes):
             supertypes.append({'name': card["supertype"], 'indexDB': supertype_count})
             supertype_count += 1
@@ -80,8 +88,10 @@ with open('cards.json', encoding="utf-8") as json_file:
                     subtype_count += 1
 
                 append_later += 'insert into card_subtype values ('
+                append_later += str(card_subtype_count) + ", "
                 append_later += return_string_for_db(card['id']) + ", "
                 append_later += str(search(subtype, subtypes)['indexDB']) + ")\n"
+                card_subtype_count += 1
 
         if 'types' in card:
             for type in card['types']:
@@ -90,8 +100,10 @@ with open('cards.json', encoding="utf-8") as json_file:
                     type_count += 1
 
                 append_later += 'insert into card_types values ('
+                append_later += str(card_type_count) + ", "
                 append_later += return_string_for_db(card['id']) + ", "
                 append_later += str(search(type, types)['indexDB']) + ")\n"
+                card_type_count += 1
 
         if 'abilities' in card:
             for ability in card['abilities']:
@@ -101,15 +113,17 @@ with open('cards.json', encoding="utf-8") as json_file:
                     sql = 'insert into abilities values ('
                     sql += str(ability_count) + ", "
                     sql += return_string_for_db(ability["name"]) + ", "
-                    sql += return_string_for_db(ability["text"]) + ", "
+                    sql += return_string_for_db(ability["text"].replace('"', "'")) + ", "
                     sql += return_string_for_db(ability["type"]) + ")\n"
 
                     file.write(sql)
                     ability_count += 1
 
                 append_later += 'insert into card_abilities values ('
+                append_later += str(card_ability_count) + ", "
                 append_later += return_string_for_db(card['id']) + ", "
                 append_later += str(search(ability['name'], abilities)['indexDB']) + ")\n"
+                card_ability_count += 1
 
         if 'attacks' in card:
             for attack in card['attacks']:
@@ -119,7 +133,7 @@ with open('cards.json', encoding="utf-8") as json_file:
                     sql = 'insert into attacks values ('
                     sql += str(attack_count) + ", "
                     sql += return_string_for_db(attack["name"]) + ", "
-                    sql += return_string_for_db(attack["text"]) + ", "
+                    sql += return_string_for_db(attack["text"].replace('"', "'")) + ", "
                     sql += (return_string_for_db(attack["type"]) if 'type' in attack else 'null') + ")\n"
 
                     file.write(sql)
@@ -140,8 +154,10 @@ with open('cards.json', encoding="utf-8") as json_file:
                     attack_count += 1
 
                 append_later += 'insert into card_attacks values ('
+                append_later += str(card_attack_count) + ", "
                 append_later += return_string_for_db(card['id']) + ", "
                 append_later += str(search(attack['name'], attacks)['indexDB']) + ")\n"
+                card_attack_count += 1
 
         if 'weaknesses' in card:
             for weakness in card['weaknesses']:
@@ -156,9 +172,11 @@ with open('cards.json', encoding="utf-8") as json_file:
                     file.write(sql)
                     weakness_count += 1
 
-                append_later += 'insert into card_weakness values ('
+                append_later += 'insert into card_weaknesses values ('
+                append_later += str(card_weakness_count) + ", "
                 append_later += return_string_for_db(card['id']) + ", "
                 append_later += str(search((weakness['type']+weakness['value']), weaknesses)['indexDB']) + ")\n"
+                card_weakness_count += 1
 
         if 'resistances' in card:
             for resistance in card['resistances']:
@@ -174,8 +192,10 @@ with open('cards.json', encoding="utf-8") as json_file:
                     resistance_count += 1
 
                 append_later += 'insert into card_resistances values ('
+                append_later += str(card_resistance_count) + ", "
                 append_later += return_string_for_db(card['id']) + ", "
                 append_later += str(search((resistance['type']+resistance['value']), resistances)['indexDB']) + ")\n"
+                card_resistance_count += 1
 
         if 'retreatCost' in card:
             current_order = 0
@@ -198,7 +218,7 @@ with open('cards.json', encoding="utf-8") as json_file:
         sql += return_string_for_db(card['number']) + ", "
         sql += return_string_for_db(card['rarity']) + ", "
         sql += str(search(card['supertype'], supertypes)['indexDB']) + ", "
-        sql += (return_string_for_db(' '.join(card['rules'])) if 'rules' in card else 'null') + ", "
+        sql += (return_string_for_db(' '.join(card['rules']).replace('"', "'")) if 'rules' in card else 'null') + ", "
         sql += return_string_for_db(card['images']['small']) + ", "
         sql += return_string_for_db(card['images']['large']) + ", "
         sql = add_legalities(sql, card['legalities']) + ")\n"

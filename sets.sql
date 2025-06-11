@@ -1,0 +1,6 @@
+insert into "set" values("sv7", "Coroa Estelar", 1, 142, "2024/09/13", "SCR", 1, 1, 1, "https://images.pokemontcg.io/sv7/logo.png", "https://images.pokemontcg.io/sv7/symbol.png")
+insert into "set" values("sv8", "Faíscas Impetuosas", 1, 191, "2024/11/08", "SSP", 1, 1, 1, "https://images.pokemontcg.io/sv8/logo.png", "https://images.pokemontcg.io/sv8/symbol.png")
+insert into "set" values("sv8pt5", "Evoluções Prismáticas", 1, 131, "2025/01/17", "PRE", 1, 1, 1, "https://images.pokemontcg.io/sv8pt5/logo.png", "https://images.pokemontcg.io/sv8pt5/symbol.png")
+insert into "set" values("sv9", "Amigos de Jornada", 1, 159, "2025/03/28", "JTG", 1, 1, 1, "https://images.pokemontcg.io/sv9/logo.png", "https://images.pokemontcg.io/sv9/symbol.png")
+insert into "set" values("sv10", "Rivais Predestinados", 1, 182, "2025/05/30", "DRI", 1, 1, 1, "https://images.pokemontcg.io/sv10/logo.png", "https://images.pokemontcg.io/sv10/symbol.png")
+insert into "series" values (1, "Escarlate & Violeta")
