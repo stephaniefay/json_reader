@@ -1,3 +1,4 @@
+insert into "supertype" values (1, "Pokémon")
 insert into abilities values (1, "Tranquil Flower", "Once during your turn, if this Pokémon is in the Active Spot, you may heal 60 damage from 1 of your Pokémon.", "Ability")
 insert into attacks values (1, "Dangerous Toxwhip", "Your opponent's Active Pokémon is now Confused and Poisoned.", null)
 insert into "cost" values (1, "Grass", 0, 1, "attack"); 
@@ -1465,6 +1466,7 @@ insert into card_attacks values (176, "sv7-128", 163)
 insert into card_attacks values (177, "sv7-128", 164)
 insert into card_weaknesses values (127, "sv7-128", 5)
 insert into "set_cards" values (128, "sv7", "sv7-128")
+insert into "supertype" values (2, "Trainer")
 insert into abilities values (19, "Protective Cover", "Prevent all effects of attacks used by your opponent's Pokémon done to this Pokémon. (Damage is not an effect.)", "Ability")
 insert into cards values ("sv7-129", "Antique Cover Fossil", 60, "129", "Common", 2, "Play this card as if it were a 60-HP Basic Colorless Pokémon. This card can't be affected by any Special Conditions and can't retreat.    At any time during your turn, you may discard this card from play. You may play any number of Item cards during your turn.", "https://images.pokemontcg.io/sv7/129.png", "https://images.pokemontcg.io/sv7/129_hires.png", 1, 1, 1)
 insert into card_abilities values (20, "sv7-129", 19)
@@ -3597,6 +3599,7 @@ insert into cards values ("sv8-189", "Tera Orb", null, "189", "Uncommon", 2, "Se
 insert into "set_cards" values (364, "sv8", "sv8-189")
 insert into cards values ("sv8-190", "Tyme", null, "190", "Uncommon", 2, "Tell your opponent the name of a Pokémon in your hand and put that Pokémon face down in front of you. Your opponent guesses that Pokémon's HP, and then you reveal it. If your opponent guessed right, they draw 4 cards. If they guessed wrong, you draw 4 cards. Then, return the Pokémon to your hand. You may play only 1 Supporter card during your turn.", "https://images.pokemontcg.io/sv8/190.png", "https://images.pokemontcg.io/sv8/190_hires.png", 1, 1, 1)
 insert into "set_cards" values (365, "sv8", "sv8-190")
+insert into "supertype" values (3, "Energy")
 insert into cards values ("sv8-191", "Enriching Energy", null, "191", "ACE SPEC Rare", 3, "As long as this card is attached to a Pokémon, it provides Colorless Energy.  When you attach this card from your hand to a Pokémon, draw 4 cards. ACE SPEC: You can't have more than 1 ACE SPEC card in your deck.", "https://images.pokemontcg.io/sv8/191.png", "https://images.pokemontcg.io/sv8/191_hires.png", 1, 1, 1)
 insert into "set_cards" values (366, "sv8", "sv8-191")
 insert into "cost" values (1243, "Colorless", 0, "sv8-192", "card"); 

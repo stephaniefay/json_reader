@@ -80,10 +80,11 @@ with open('cards.json', encoding="utf-8") as json_file:
         if not any(d['name'] == card['supertype'] for d in supertypes):
             supertypes.append({'name': card["supertype"], 'indexDB': supertype_count})
 
-            sql += 'insert into "supertype" values ('
+            sql = 'insert into "supertype" values ('
             sql += str(supertype_count) + ", "
             sql += return_string_for_db(card["supertype"]) + ")\n"
 
+            file.write(sql)
             supertype_count += 1
 
         if 'subtype' in card:
