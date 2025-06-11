@@ -91,6 +91,12 @@ with open('cards.json', encoding="utf-8") as json_file:
             for subtype in card['subtypes']:
                 if not any(d['name'] == subtype for d in subtypes):
                     subtypes.append({'name': subtype, 'indexDB': subtype_count})
+
+                    sql = 'insert into "subtype" values ('
+                    sql += str(subtype_count) + ", "
+                    sql += return_string_for_db(subtype) + ")\n"
+
+                    file.write(sql)
                     subtype_count += 1
 
                 append_later += 'insert into card_subtype values ('
@@ -103,6 +109,12 @@ with open('cards.json', encoding="utf-8") as json_file:
             for type in card['types']:
                 if not any(d['name'] == type for d in types):
                     types.append({'name': type, 'indexDB': type_count})
+
+                    sql = 'insert into "type" values ('
+                    sql += str(type_count) + ", "
+                    sql += return_string_for_db(type) + ")\n"
+
+                    file.write(sql)
                     type_count += 1
 
                 append_later += 'insert into card_types values ('
