@@ -211,8 +211,8 @@ with open('cards.json', encoding="utf-8") as json_file:
 
                     sql = 'insert into resistances values ('
                     sql += str(resistance_count) + ", "
-                    sql += return_string_for_db(weakness['type']) + ", "
-                    sql += return_string_for_db(weakness['value']) + ")\n"
+                    sql += return_string_for_db(resistance['type']) + ", "
+                    sql += return_string_for_db(resistance['value']) + ")\n"
 
                     file.write(sql)
                     resistance_count += 1

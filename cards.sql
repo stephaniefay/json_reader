@@ -705,7 +705,7 @@ insert into "type" values (5, "Psychic")
 insert into attacks values (74, "Dangle Tail", "", "Put a Pokémon from your discard pile into your hand.")
 insert into "cost" values (235, "Colorless", 0, 74, "attack"); 
 insert into weaknesses values (6, "Darkness", "×2")
-insert into resistances values (1, "Darkness", "×2")
+insert into resistances values (1, "Fighting", "-30")
 insert into "cost" values (236, "Colorless", 0, "sv7-57", "card"); 
 insert into "cost" values (237, "Colorless", 1, "sv7-57", "card"); 
 insert into cards values ("sv7-57", "Slowpoke", 80, "57", "Common", 1, null, "https://images.pokemontcg.io/sv7/57.png", "https://images.pokemontcg.io/sv7/57_hires.png", 1, 1, 1)
@@ -1238,7 +1238,7 @@ insert into "cost" values (415, "Colorless", 0, 130, "attack");
 insert into attacks values (131, "Slap", "30", "")
 insert into "cost" values (416, "Metal", 0, 131, "attack"); 
 insert into "cost" values (417, "Colorless", 1, 131, "attack"); 
-insert into resistances values (2, "Fire", "×2")
+insert into resistances values (2, "Grass", "-30")
 insert into "cost" values (418, "Colorless", 0, "sv7-98", "card"); 
 insert into cards values ("sv7-98", "Jirachi", 80, "98", "Uncommon", 1, null, "https://images.pokemontcg.io/sv7/98.png", "https://images.pokemontcg.io/sv7/98_hires.png", 1, 1, 1)
 insert into card_subtype values (113, "sv7-98", 3)
