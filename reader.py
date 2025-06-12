@@ -1,4 +1,5 @@
 import json
+import os
 
 def search(name, list):
     return [element for element in list if element['name'] == name][0]
@@ -11,6 +12,13 @@ def add_legalities (sql, legalities):
     sql += (str(1) if 'expanded' in legalities else str(0)) + ", "
     sql += (str(1) if 'standard' in legalities else str(0))
     return sql
+
+if os.path.exists('sets.sql'):
+    os.remove('sets.sql')
+
+if os.path.exists('cards.sql'):
+    os.remove('cards.sql')
+
 
 file = open("sets.sql", "x", encoding="utf-8")
 
@@ -56,7 +64,7 @@ with open('cards.json', encoding="utf-8") as json_file:
     attack_count = 1
     weakness_count = 1
     resistance_count = 1
-    retreat_count = 1
+    cost_count = 1
 
     set_card_count = 1
     card_subtype_count = 1
@@ -87,12 +95,12 @@ with open('cards.json', encoding="utf-8") as json_file:
             file.write(sql)
             supertype_count += 1
 
-        if 'subtype' in card:
+        if 'subtypes' in card:
             for subtype in card['subtypes']:
                 if not any(d['name'] == subtype for d in subtypes):
                     subtypes.append({'name': subtype, 'indexDB': subtype_count})
 
-                    sql = 'insert into "subtype" values ('
+                    sql = 'insert into subtype values ('
                     sql += str(subtype_count) + ", "
                     sql += return_string_for_db(subtype) + ")\n"
 
@@ -151,15 +159,15 @@ with open('cards.json', encoding="utf-8") as json_file:
                     sql = 'insert into attacks values ('
                     sql += str(attack_count) + ", "
                     sql += return_string_for_db(attack["name"]) + ", "
-                    sql += return_string_for_db(attack["text"].replace('"', "'")) + ", "
-                    sql += (return_string_for_db(attack["type"]) if 'type' in attack else 'null') + ")\n"
+                    sql += return_string_for_db(attack["damage"] if 'damage' in attack else 'null') + ", "
+                    sql += (return_string_for_db(attack["text"].replace('"', "'")) if 'text' in attack else 'null') + ")\n"
 
                     file.write(sql)
 
                     current_order = 0
                     for cost in attack['cost']:
                         sql = 'insert into "cost" values ('
-                        sql += str(retreat_count) + ", "
+                        sql += str(cost_count) + ", "
                         sql += return_string_for_db(cost) + ", "
                         sql += str(current_order) + ", "
                         sql += str(attack_count) + ", "
@@ -167,7 +175,7 @@ with open('cards.json', encoding="utf-8") as json_file:
 
                         file.write(sql)
                         current_order += 1
-                        retreat_count += 1
+                        cost_count += 1
 
                     attack_count += 1
 
@@ -219,7 +227,7 @@ with open('cards.json', encoding="utf-8") as json_file:
             current_order = 0
             for cost in card['retreatCost']:
                 sql = 'insert into "cost" values ('
-                sql += str(retreat_count) + ", "
+                sql += str(cost_count) + ", "
                 sql += return_string_for_db(cost) + ", "
                 sql += str(current_order) + ", "
                 sql += return_string_for_db(card['id']) + ", "
@@ -227,7 +235,7 @@ with open('cards.json', encoding="utf-8") as json_file:
 
                 file.write(sql)
                 current_order += 1
-                retreat_count += 1
+                cost_count += 1
 
         sql = 'insert into cards values ('
         sql += return_string_for_db(card['id']) + ", "
